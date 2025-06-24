@@ -80,27 +80,56 @@ def create_downloadable_results(result: Dict[str, Any], weights: List[int],
     """
     Sonuçları indirilebilir JSON formatında hazırlar
     """
-    output = {
-        "problem": {
-            "weights": weights,
-            "values": values,
-            "capacity": capacity
-        },
-        "solution": {
-            "max_value": result['max_value'],
-            "selected_items": result['selected_items'],
-            "total_weight": result['total_weight'],
-            "total_value": result['total_value'],
-            "execution_time": result['execution_time']
-        },
-        "dp_table": result['dp_table'].tolist(),
-        "complexity_analysis": {
-            "time_complexity": f"O({len(weights)} × {capacity})",
-            "space_complexity": f"O({len(weights)} × {capacity})"
+    try:
+        # Convert NumPy arrays to lists for JSON serialization
+        dp_table_list = result['dp_table'].tolist() if hasattr(result['dp_table'], 'tolist') else result['dp_table']
+        
+        # Ensure all numeric values are Python native types
+        output = {
+            "problem": {
+                "weights": [int(w) for w in weights],
+                "values": [int(v) for v in values],
+                "capacity": int(capacity)
+            },
+            "solution": {
+                "max_value": int(result['max_value']) if isinstance(result['max_value'], (np.integer, np.floating)) else result['max_value'],
+                "selected_items": [int(item) for item in result['selected_items']],
+                "total_weight": int(result['total_weight']) if isinstance(result['total_weight'], (np.integer, np.floating)) else result['total_weight'],
+                "total_value": int(result['total_value']) if isinstance(result['total_value'], (np.integer, np.floating)) else result['total_value'],
+                "execution_time": float(result['execution_time']) if isinstance(result['execution_time'], (np.integer, np.floating)) else result['execution_time']
+            },
+            "dp_table": dp_table_list,
+            "complexity_analysis": {
+                "time_complexity": f"O({len(weights)} × {capacity})",
+                "space_complexity": f"O({len(weights)} × {capacity})"
+            }
         }
-    }
-    
-    return json.dumps(output, indent=2, ensure_ascii=False)
+        
+        return json.dumps(output, indent=2, ensure_ascii=False)
+        
+    except Exception as e:
+        # Fallback: create a simpler output without dp_table
+        simplified_output = {
+            "problem": {
+                "weights": list(weights),
+                "values": list(values),
+                "capacity": capacity
+            },
+            "solution": {
+                "max_value": str(result.get('max_value', 'N/A')),
+                "selected_items": list(result.get('selected_items', [])),
+                "total_weight": str(result.get('total_weight', 'N/A')),
+                "total_value": str(result.get('total_value', 'N/A')),
+                "execution_time": str(result.get('execution_time', 'N/A'))
+            },
+            "error": f"Could not serialize full result: {str(e)}",
+            "complexity_analysis": {
+                "time_complexity": f"O({len(weights)} × {capacity})",
+                "space_complexity": f"O({len(weights)} × {capacity})"
+            }
+        }
+        
+        return json.dumps(simplified_output, indent=2, ensure_ascii=False)
 
 def parse_list_input(input_str: str) -> List[int]:
     """
