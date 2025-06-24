@@ -18,12 +18,9 @@ def safe_import():
         import algorithm
         KnapsackSolver = algorithm.KnapsackSolver
         
-        # Import visualizer module  
-        import visualizer
-        KnapsackVisualizer = visualizer.KnapsackVisualizer
-        
-        # Import utils module
+        # Import utils module (now contains visualizer too)
         import utils
+        KnapsackVisualizer = utils.KnapsackVisualizer
         load_sample_data = utils.load_sample_data
         validate_input = utils.validate_input
         format_results = utils.format_results
