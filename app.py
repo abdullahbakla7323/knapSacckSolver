@@ -1,15 +1,83 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from algorithm import KnapsackSolver
-from visualizer import KnapsackVisualizer
-from utils import (
-    load_sample_data, validate_input, format_results, 
-    create_downloadable_results, parse_list_input, 
-    create_random_problem, display_problem_info,
-    calculate_problem_difficulty, get_algorithm_explanation,
-    export_to_csv
-)
+import sys
+import os
+from pathlib import Path
+
+# Ensure current directory is in path for imports
+current_dir = Path(__file__).parent.absolute()
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
+
+# Import custom modules with detailed error handling
+def safe_import():
+    """Safely import all required modules with detailed error reporting."""
+    try:
+        # Import algorithm module
+        import algorithm
+        KnapsackSolver = algorithm.KnapsackSolver
+        
+        # Import visualizer module  
+        import visualizer
+        KnapsackVisualizer = visualizer.KnapsackVisualizer
+        
+        # Import utils module
+        import utils
+        load_sample_data = utils.load_sample_data
+        validate_input = utils.validate_input
+        format_results = utils.format_results
+        create_downloadable_results = utils.create_downloadable_results
+        parse_list_input = utils.parse_list_input
+        create_random_problem = utils.create_random_problem
+        display_problem_info = utils.display_problem_info
+        calculate_problem_difficulty = utils.calculate_problem_difficulty
+        get_algorithm_explanation = utils.get_algorithm_explanation
+        export_to_csv = utils.export_to_csv
+        
+        return {
+            'KnapsackSolver': KnapsackSolver,
+            'KnapsackVisualizer': KnapsackVisualizer,
+            'load_sample_data': load_sample_data,
+            'validate_input': validate_input,
+            'format_results': format_results,
+            'create_downloadable_results': create_downloadable_results,
+            'parse_list_input': parse_list_input,
+            'create_random_problem': create_random_problem,
+            'display_problem_info': display_problem_info,
+            'calculate_problem_difficulty': calculate_problem_difficulty,
+            'get_algorithm_explanation': get_algorithm_explanation,
+            'export_to_csv': export_to_csv
+        }
+        
+    except ImportError as e:
+        st.error(f"❌ Import Error: {str(e)}")
+        st.error(f"Current directory: {current_dir}")
+        st.error(f"Files in directory: {list(current_dir.glob('*.py'))}")
+        st.error("Please ensure all required Python files are in the same directory.")
+        st.stop()
+        return None
+    except Exception as e:
+        st.error(f"❌ Unexpected Error: {str(e)}")
+        st.error("An unexpected error occurred during module import.")
+        st.stop()
+        return None
+
+# Import all required functions and classes
+modules = safe_import()
+if modules:
+    KnapsackSolver = modules['KnapsackSolver']
+    KnapsackVisualizer = modules['KnapsackVisualizer']
+    load_sample_data = modules['load_sample_data']
+    validate_input = modules['validate_input']
+    format_results = modules['format_results']
+    create_downloadable_results = modules['create_downloadable_results']
+    parse_list_input = modules['parse_list_input']
+    create_random_problem = modules['create_random_problem']
+    display_problem_info = modules['display_problem_info']
+    calculate_problem_difficulty = modules['calculate_problem_difficulty']
+    get_algorithm_explanation = modules['get_algorithm_explanation']
+    export_to_csv = modules['export_to_csv']
 
 # Sayfa yapılandırması
 st.set_page_config(
