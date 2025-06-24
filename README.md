@@ -1,92 +1,92 @@
 # 🎒 Knapsack Problem Solver
 
-**Abdullah Bakla** - Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği  
-**Algoritma ve Programlama II - Dönem Sonu Projesi**
+**Abdullah Bakla** - Firat University Faculty of Technology Software Engineering  
+**Algorithms and Programming II - Semester Final Project**
 
-## 📖 Proje Açıklaması
+## 📖 Project Description
 
-Bu proje, **Knapsack (Sırt Çantası) Problemi**ni **Dinamik Programlama** yaklaşımı ile çözen interaktif bir web uygulamasıdır. Uygulama, algoritmanın çalışma prensiplerini görselleştirerek öğrenme sürecini destekler.
+This project is an interactive web application that solves the **Knapsack (Backpack) Problem** using the **Dynamic Programming** approach. The application supports the learning process by visualizing the algorithm's working principles.
 
-### 🎯 Knapsack Problemi Nedir?
+### 🎯 What is the Knapsack Problem?
 
-Knapsack problemi, belirli bir kapasiteye sahip çantaya, maksimum değeri elde edecek şekilde eşyaları yerleştirme problemidir. Her eşyanın bir ağırlığı ve değeri vardır. Amaç, çanta kapasitesini aşmadan mümkün olan en yüksek toplam değeri elde etmektir.
+The knapsack problem is about placing items in a bag with a specific capacity to achieve maximum value. Each item has a weight and value. The goal is to obtain the highest total value without exceeding the bag's capacity.
 
-**Matematiksel Formülasyon:**
-- n eşya: (w₁, v₁), (w₂, v₂), ..., (wₙ, vₙ)
-- Çanta kapasitesi: W
-- Amaç: Σ vᵢ maksimize et, Σ wᵢ ≤ W koşulu altında
+**Mathematical Formulation:**
+- n items: (w₁, v₁), (w₂, v₂), ..., (wₙ, vₙ)
+- Bag capacity: W
+- Objective: Maximize Σ vᵢ under the constraint Σ wᵢ ≤ W
 
-## 🚀 Streamlit Uygulaması
+## 🚀 Streamlit Application
 
-**🌐 Canlı Demo:** [Streamlit Cloud Link](URL_BURAYA_EKLENECEK)
+**🌐 Live Demo:** [Streamlit Cloud Link](URL_TO_BE_ADDED)
 
-## ✨ Özellikler
+## ✨ Features
 
-### 🔧 Temel Özellikler
-- ✅ Dinamik programlama ile optimal çözüm
-- ✅ Adım adım algoritma visualizasyonu  
-- ✅ İnteraktif kullanıcı arayüzü
-- ✅ Gerçek zamanlı görselleştirme
-- ✅ Çoklu problem türü desteği
-- ✅ Performans analizi
+### 🔧 Core Features
+- ✅ Optimal solution using dynamic programming
+- ✅ Step-by-step algorithm visualization  
+- ✅ Interactive user interface
+- ✅ Real-time visualization
+- ✅ Multiple problem type support
+- ✅ Performance analysis
 
-### 📊 Görselleştirmeler
-- **DP Tablosu Isı Haritası:** Dinamik programlama tablosunun adım adım doldurulması
-- **Eşya Karşılaştırması:** Ağırlık, değer ve verimlilik analizleri
-- **Çözüm İlerlemesi:** Algoritmanın değer optimizasyon süreci
-- **Çanta Görselleştirmesi:** Seçilen eşyaların dağılımı
+### 📊 Visualizations
+- **DP Table Heatmap:** Step-by-step filling of the dynamic programming table
+- **Item Comparison:** Weight, value, and efficiency analyses
+- **Solution Progress:** Algorithm's value optimization process
+- **Bag Visualization:** Distribution of selected items
 
-### 🎮 Kullanıcı Etkileşimi
-- **Manuel Girdi:** Kendi eşya ağırlık ve değerlerinizi girin
-- **Örnek Problemler:** Hazır test senaryoları
-- **Rastgele Problem Üretici:** Parametre ayarlı otomatik problem oluşturma
-- **Adım Adım Navigasyon:** Algoritmanın her adımını inceleyin
+### 🎮 User Interaction
+- **Manual Input:** Enter your own item weights and values
+- **Sample Problems:** Ready test scenarios
+- **Random Problem Generator:** Automatic problem creation with parameter settings
+- **Step-by-Step Navigation:** Examine each step of the algorithm
 
-## 🛠️ Teknoloji Stack'i
+## 🛠️ Technology Stack
 
-- **🐍 Python 3.8+** - Ana programlama dili
-- **🎯 Streamlit** - Web uygulaması framework'ü
-- **📊 Plotly** - İnteraktif görselleştirmeler
-- **🔢 NumPy** - Sayısal hesaplamalar
-- **📈 Pandas** - Veri analizi ve manipülasyonu
-- **🧪 Pytest** - Unit testler
+- **🐍 Python 3.8+** - Main programming language
+- **🎯 Streamlit** - Web application framework
+- **📊 Plotly** - Interactive visualizations
+- **🔢 NumPy** - Numerical computations
+- **📈 Pandas** - Data analysis and manipulation
+- **🧪 Pytest** - Unit tests
 
-## 📁 Proje Yapısı
+## 📁 Project Structure
 
 ```
 knapSackMain/
-├── app.py                  # Ana Streamlit uygulaması
-├── algorithm.py            # Knapsack algoritması implementasyonu
-├── visualizer.py           # Görselleştirme bileşenleri
-├── utils.py               # Yardımcı fonksiyonlar
-├── test_algorithm.py      # Unit testler
-├── requirements.txt       # Python bağımlılıkları
-├── README.md             # Bu dosya
-├── examples/             # Örnek problemler
+├── app.py                  # Main Streamlit application
+├── algorithm.py            # Knapsack algorithm implementation
+├── visualizer.py           # Visualization components
+├── utils.py               # Helper functions
+├── test_algorithm.py      # Unit tests
+├── requirements.txt       # Python dependencies
+├── README.md             # This file
+├── examples/             # Sample problems
 │   ├── example1.json
 │   └── example2.json
-└── data/                 # Test veri setleri
+└── data/                 # Test datasets
     ├── small_problems.csv
     └── large_problems.csv
 ```
 
-## 🔧 Kurulum ve Çalıştırma
+## 🔧 Installation and Running
 
-### 1. Gereksinimler
+### 1. Requirements
 
 ```bash
 Python 3.8+
 pip (Python package manager)
 ```
 
-### 2. Projeyi İndirin
+### 2. Download the Project
 
 ```bash
 git clone https://github.com/firat-university-algorithms/abdullah-bakla-knapsack.git
 cd abdullah-bakla-knapsack
 ```
 
-### 3. Virtual Environment Oluşturun
+### 3. Create Virtual Environment
 
 ```bash
 # Windows
@@ -98,159 +98,159 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 4. Bağımlılıkları Yükleyin
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Uygulamayı Çalıştırın
+### 5. Run the Application
 
 ```bash
 streamlit run app.py
 ```
 
-Uygulama `http://localhost:8501` adresinde açılacaktır.
+The application will open at `http://localhost:8501`.
 
-## 📈 Kullanım Kılavuzu
+## 📈 Usage Guide
 
-### 🎯 Problem Tanımlama
-1. **Problem Türü Seçin:**
-   - Manuel Girdi: Kendi değerlerinizi girin
-   - Örnek Problemler: Hazır test senaryoları  
-   - Rastgele Problem: Otomatik oluşturma
+### 🎯 Problem Definition
+1. **Choose Problem Type:**
+   - Manual Input: Enter your own values
+   - Sample Problems: Ready test scenarios  
+   - Random Problem: Automatic generation
 
-2. **Parametreleri Ayarlayın:**
-   - Eşya ağırlıkları (virgül ile ayırın)
-   - Eşya değerleri (virgül ile ayırın)
-   - Çanta kapasitesi
+2. **Set Parameters:**
+   - Item weights (comma-separated)
+   - Item values (comma-separated)
+   - Bag capacity
 
-### 🔍 Analiz Süreçleri
+### 🔍 Analysis Processes
 
-**Problem Analizi Sekmesi:**
-- Problem zorluğu değerlendirmesi
-- Eşya detayları ve verimlilik oranları
-- Çözüm başlatma ve sonuç metrikleri
+**Problem Analysis Tab:**
+- Problem difficulty assessment
+- Item details and efficiency ratios
+- Solution initiation and result metrics
 
-**Çözüm Süreci Sekmesi:**
-- Adım adım algoritma takibi
-- DP tablosu animasyonu
-- Karar süreçlerinin detayları
+**Solution Process Tab:**
+- Step-by-step algorithm tracking
+- DP table animation
+- Decision process details
 
-**Görselleştirme Sekmesi:**
-- DP tablosu ısı haritası
-- Eşya karşılaştırma grafikleri
-- Çanta içeriği visualizasyonu
+**Visualization Tab:**
+- DP table heatmap
+- Item comparison charts
+- Bag content visualization
 
-**Karşılaştırma Sekmesi:**
-- Dinamik Programlama vs Açgözlü Yöntem
-- Performance metrikleri karşılaştırması
-- Optimallik analizi
+**Comparison Tab:**
+- Dynamic Programming vs Greedy Method
+- Performance metrics comparison
+- Optimality analysis
 
-## 🧮 Algoritma Detayları
+## 🧮 Algorithm Details
 
-### Dinamik Programlama Yaklaşımı
+### Dynamic Programming Approach
 
-**DP Formülü:**
+**DP Formula:**
 ```
 DP[i][w] = max(
-    DP[i-1][w],                           // Eşyayı alma
-    DP[i-1][w-weight[i]] + value[i]       // Eşyayı al
+    DP[i-1][w],                           // Don't take item
+    DP[i-1][w-weight[i]] + value[i]       // Take item
 )
 ```
 
-**Zaman Karmaşıklığı:** O(n × W)
-- n: Eşya sayısı
-- W: Çanta kapasitesi
+**Time Complexity:** O(n × W)
+- n: Number of items
+- W: Bag capacity
 
-**Uzay Karmaşıklığı:** O(n × W)
-- DP tablosu 2D array gerektirir
+**Space Complexity:** O(n × W)
+- DP table requires 2D array
 
-### Algoritma Adımları
+### Algorithm Steps
 
-1. **Tablo Başlatma:** (n+1) × (W+1) boyutunda DP tablosu oluştur
-2. **Tablo Doldurma:** Her eşya için her kapasite değerini hesapla
-3. **Karar Verme:** Eşyayı al/alma kararını ver
-4. **Geri İzleme:** Optimal çözümü bul
+1. **Table Initialization:** Create DP table of size (n+1) × (W+1)
+2. **Table Filling:** Calculate each capacity value for each item
+3. **Decision Making:** Decide to take/not take item
+4. **Backtracking:** Find optimal solution
 
-## 📊 Test Senaryoları
+## 📊 Test Scenarios
 
-### Basit Örnek
+### Simple Example
 ```
-Eşyalar: [(10kg, 60₺), (20kg, 100₺), (30kg, 120₺)]
-Kapasite: 50kg
-Optimal Çözüm: Eşya 1 + Eşya 2 = 220₺
+Items: [(10kg, 60₺), (20kg, 100₺), (30kg, 120₺)]
+Capacity: 50kg
+Optimal Solution: Item 1 + Item 2 = 220₺
 ```
 
-### Klasik Örnek  
+### Classic Example  
 ```
-Eşyalar: [(2kg, 12₺), (1kg, 10₺), (3kg, 20₺), (2kg, 15₺)]
-Kapasite: 5kg
-Optimal Çözüm: Dinamik hesaplama gerekli
+Items: [(2kg, 12₺), (1kg, 10₺), (3kg, 20₺), (2kg, 15₺)]
+Capacity: 5kg
+Optimal Solution: Dynamic calculation required
 ```
 
 ## 🔄 Deployment
 
 ### Streamlit Cloud Deployment
 
-1. **Hesap Oluşturun:** [Streamlit Cloud](https://streamlit.io/cloud)
-2. **Repository Bağlayın:** GitHub repository'nizi bağlayın
-3. **Deploy Edin:** Otomatik deployment başlatın
-4. **URL Paylaşın:** Canlı uygulamayı paylaşın
+1. **Create Account:** [Streamlit Cloud](https://streamlit.io/cloud)
+2. **Connect Repository:** Link your GitHub repository
+3. **Deploy:** Start automatic deployment
+4. **Share URL:** Share the live application
 
 ### Alternative Deployment
 
-- **Heroku:** `heroku create` ile deploy
-- **AWS:** EC2 instance üzerinde
-- **Google Cloud:** App Engine ile
+- **Heroku:** Deploy with `heroku create`
+- **AWS:** On EC2 instance
+- **Google Cloud:** With App Engine
 
-## 🧪 Testler
+## 🧪 Tests
 
-### Unit Test Çalıştırma
+### Running Unit Tests
 
 ```bash
-# Pytest ile
+# With pytest
 pytest test_algorithm.py -v
 
-# Python ile
+# With Python
 python test_algorithm.py
 ```
 
-### Test Kapsamı
-- ✅ Basit knapsack problemleri
-- ✅ Edge case senaryoları  
-- ✅ DP tablosu doğrulaması
-- ✅ Performans testleri
-- ✅ Greedy karşılaştırması
+### Test Coverage
+- ✅ Simple knapsack problems
+- ✅ Edge case scenarios  
+- ✅ DP table validation
+- ✅ Performance tests
+- ✅ Greedy comparison
 
-## 📈 Komplekslik Analizi
+## 📈 Complexity Analysis
 
-### Zaman Karmaşıklığı
-- **En İyi:** O(n × W)
-- **Ortalama:** O(n × W)  
-- **En Kötü:** O(n × W)
+### Time Complexity
+- **Best Case:** O(n × W)
+- **Average Case:** O(n × W)  
+- **Worst Case:** O(n × W)
 
-### Uzay Karmaşıklığı
-- **DP Tablosu:** O(n × W)
-- **Optimizasyon:** O(W) - Tek satır kullanımı ile
+### Space Complexity
+- **DP Table:** O(n × W)
+- **Optimization:** O(W) - Using single row
 
-### Performans Optimizasyonları
+### Performance Optimizations
 - Memory-efficient DP implementation
 - Step-by-step execution tracking
 - Efficient backtracking for solution reconstruction
 
-## 🎨 Ekran Görüntüleri
+## 🎨 Screenshots
 
-### Ana Dashboard
+### Main Dashboard
 ![Dashboard](docs/screenshots/dashboard.png)
 
-### Adım Adım Çözüm
+### Step-by-Step Solution
 ![Step-by-step](docs/screenshots/step-by-step.png)
 
-### Görselleştirmeler
+### Visualizations
 ![Visualizations](docs/screenshots/visualizations.png)
 
-## 📚 Referanslar
+## 📚 References
 
 1. **Introduction to Algorithms (CLRS)** - 4th Edition, Chapter 16
 2. **Algorithm Design Manual** - Steven Skiena
@@ -258,51 +258,51 @@ python test_algorithm.py
 4. **Streamlit Documentation:** [https://docs.streamlit.io](https://docs.streamlit.io)
 5. **Plotly Documentation:** [https://plotly.com/python/](https://plotly.com/python/)
 
-## 🔮 Gelecek Geliştirmeler
+## 🔮 Future Improvements
 
 - [ ] **0/1 Knapsack variants** - Multiple knapsack, bounded knapsack
-- [ ] **Genetic Algorithm** karşılaştırması
-- [ ] **3D Visualization** - 3 boyutlu çanta görselleştirmesi
-- [ ] **Export/Import** - Problem setlerinin dışa/içe aktarımı
-- [ ] **Performance Benchmarking** - Algoritma karşılaştırma araçları
-- [ ] **Multi-language Support** - İngilizce dil desteği
+- [ ] **Genetic Algorithm** comparison
+- [ ] **3D Visualization** - 3D bag visualization
+- [ ] **Export/Import** - Problem set export/import
+- [ ] **Performance Benchmarking** - Algorithm comparison tools
+- [ ] **Multi-language Support** - Turkish language support
 
-## 🐛 Bilinen Sınırlamalar
+## 🐛 Known Limitations
 
-- **Memory Usage:** Büyük problemler (n×W > 10⁶) için bellek sınırlaması
-- **Visualization Performance:** 100+ eşya için görselleştirme yavaşlaması  
-- **Browser Compatibility:** Eski tarayıcılarda görselleştirme sorunları
+- **Memory Usage:** Memory limitation for large problems (n×W > 10⁶)
+- **Visualization Performance:** Slowdown for 100+ items visualization  
+- **Browser Compatibility:** Visualization issues in older browsers
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-Bu proje akademik bir çalışmadır. Önerilerilez için:
+This project is an academic work. For suggestions:
 
-1. Issue oluşturun
-2. Fork yapın
-3. Feature branch oluşturun
-4. Pull request gönderin
+1. Create an issue
+2. Fork the repository
+3. Create a feature branch
+4. Send a pull request
 
-## 📄 Lisans
+## 📄 License
 
-Bu proje eğitim amaçlı olarak geliştirilmiştir.  
-Fırat Üniversitesi Algoritma ve Programlama II dersi kapsamında hazırlanmıştır.
+This project has been developed for educational purposes.  
+Prepared within the scope of Firat University Algorithms and Programming II course.
 
-## 👨‍💻 Geliştirici
+## 👨‍💻 Developer
 
 **Abdullah Bakla**
-- 🎓 Fırat Üniversitesi - Teknoloji Fakültesi
-- 💻 Yazılım Mühendisliği Bölümü
+- 🎓 Firat University - Faculty of Technology
+- 💻 Software Engineering Department
 - 📧 [email@example.com](mailto:email@example.com)
 - 🔗 [GitHub Profile](https://github.com/abdullahbakla)
 
-## 🙏 Teşekkürler
+## 🙏 Acknowledgments
 
-- **Doç. Dr. Ferhat UÇAR** - Ders sorumlusu ve proje danışmanı
-- **Fırat Üniversitesi** - Eğitim altyapısı
-- **Open Source Community** - Kullanılan kütüphaneler
+- **Assoc. Prof. Ferhat UÇAR** - Course instructor and project advisor
+- **Firat University** - Educational infrastructure
+- **Open Source Community** - Used libraries
 
 ---
 
-⭐ **Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!**
+⭐ **If you liked this project, don't forget to star it!**
 
-📅 **Son Güncelleme:** Aralık 2024 
+📅 **Last Update:** December 2024 
