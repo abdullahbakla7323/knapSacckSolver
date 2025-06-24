@@ -2,6 +2,9 @@ import json
 import pandas as pd
 import numpy as np
 import streamlit as st
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from typing import List, Tuple, Dict, Any
 
 def load_sample_data() -> Dict[str, Any]:
@@ -214,4 +217,228 @@ def export_to_csv(weights: List[int], values: List[int], capacity: int,
         })
     
     df = pd.DataFrame(data)
-    return df.to_csv(index=False, encoding='utf-8-sig') 
+    return df.to_csv(index=False, encoding='utf-8-sig')
+
+# ===================================
+# VISUALIZATION FUNCTIONS
+# ===================================
+
+class KnapsackVisualizer:
+    """
+    Knapsack problemi için görselleştirme sınıfı
+    """
+    
+    def __init__(self):
+        pass
+    
+    def create_dp_table_heatmap(self, dp_table: np.ndarray, step: int = None) -> go.Figure:
+        """
+        DP tablosunu ısı haritası olarak görselleştirir
+        """
+        fig = go.Figure(data=go.Heatmap(
+            z=dp_table,
+            colorscale='Viridis',
+            showscale=True,
+            colorbar=dict(title="Maksimum Değer"),
+            hoverongaps=False,
+            hovertemplate='Eşya: %{y}<br>Kapasite: %{x}<br>Değer: %{z}<extra></extra>'
+        ))
+        
+        fig.update_layout(
+            title=f'Dinamik Programlama Tablosu{"" if step is None else f" - Adım {step}"}',
+            xaxis_title='Kapasite',
+            yaxis_title='Eşya İndeksi',
+            width=800,
+            height=500
+        )
+        
+        return fig
+    
+    def create_items_comparison_chart(self, weights: List[int], values: List[int], 
+                                    selected_items: List[int]) -> go.Figure:
+        """
+        Eşyaları karşılaştırmalı olarak görselleştirir
+        """
+        n = len(weights)
+        items = list(range(n))
+        colors = ['Seçildi' if i in selected_items else 'Seçilmedi' for i in items]
+        
+        # Verimlilik oranları (değer/ağırlık)
+        efficiency = [values[i]/weights[i] for i in items]
+        
+        fig = make_subplots(
+            rows=2, cols=2,
+            subplot_titles=('Eşya Ağırlıkları', 'Eşya Değerleri', 
+                          'Verimlilik Oranı (Değer/Ağırlık)', 'Değer vs Ağırlık'),
+            specs=[[{"type": "bar"}, {"type": "bar"}],
+                   [{"type": "bar"}, {"type": "scatter"}]]
+        )
+        
+        # Ağırlık grafiği
+        fig.add_trace(
+            go.Bar(x=[f'Eşya {i}' for i in items], y=weights, 
+                  marker_color=[px.colors.qualitative.Set1[0] if i in selected_items 
+                               else px.colors.qualitative.Set1[1] for i in items],
+                  name='Ağırlık'),
+            row=1, col=1
+        )
+        
+        # Değer grafiği
+        fig.add_trace(
+            go.Bar(x=[f'Eşya {i}' for i in items], y=values,
+                  marker_color=[px.colors.qualitative.Set1[0] if i in selected_items 
+                               else px.colors.qualitative.Set1[1] for i in items],
+                  name='Değer'),
+            row=1, col=2
+        )
+        
+        # Verimlilik grafiği
+        fig.add_trace(
+            go.Bar(x=[f'Eşya {i}' for i in items], y=efficiency,
+                  marker_color=[px.colors.qualitative.Set1[0] if i in selected_items 
+                               else px.colors.qualitative.Set1[1] for i in items],
+                  name='Verimlilik'),
+            row=2, col=1
+        )
+        
+        # Scatter plot
+        fig.add_trace(
+            go.Scatter(x=weights, y=values, mode='markers+text',
+                      marker=dict(size=[20 if i in selected_items else 10 for i in items],
+                                 color=[px.colors.qualitative.Set1[0] if i in selected_items 
+                                       else px.colors.qualitative.Set1[1] for i in items]),
+                      text=[f'E{i}' for i in items],
+                      textposition="middle center",
+                      name='Eşyalar'),
+            row=2, col=2
+        )
+        
+        fig.update_layout(height=700, showlegend=False, 
+                         title_text="Knapsack Eşyalarının Analizi")
+        
+        return fig
+    
+    def create_solution_progress_chart(self, steps: List[Dict]) -> go.Figure:
+        """
+        Çözüm sürecinin ilerlemesini gösterir
+        """
+        if not steps:
+            return go.Figure()
+            
+        step_numbers = list(range(1, len(steps) + 1))
+        current_values = [step.get('current_value', 0) for step in steps]
+        
+        fig = go.Figure()
+        
+        fig.add_trace(go.Scatter(
+            x=step_numbers,
+            y=current_values,
+            mode='lines+markers',
+            name='Maksimum Değer',
+            line=dict(color='blue', width=3),
+            marker=dict(size=8)
+        ))
+        
+        fig.update_layout(
+            title='Çözüm Sürecindeki Değer Değişimi',
+            xaxis_title='Adım Numarası',
+            yaxis_title='Maksimum Değer',
+            hovermode='x unified'
+        )
+        
+        return fig
+    
+    def create_knapsack_visual(self, weights: List[int], values: List[int], 
+                             selected_items: List[int], capacity: int) -> go.Figure:
+        """
+        Çanta görselleştirmesi oluşturur
+        """
+        fig = go.Figure()
+        
+        # Seçilen eşyaları göster
+        selected_weights = [weights[i] for i in selected_items]
+        selected_values = [values[i] for i in selected_items]
+        selected_labels = [f'Eşya {i}' for i in selected_items]
+        
+        if selected_weights:
+            # Pie chart for selected items
+            fig.add_trace(go.Pie(
+                labels=selected_labels,
+                values=selected_weights,
+                name="Seçilen Eşyalar",
+                hole=.3,
+                textinfo='label+percent',
+                textposition='auto'
+            ))
+        
+        total_weight = sum(selected_weights)
+        fig.update_layout(
+            title=f'Çanta İçeriği (Toplam Ağırlık: {total_weight}/{capacity})',
+            annotations=[dict(text=f'Kullanılan<br>Kapasite<br>{total_weight}/{capacity}', 
+                            x=0.5, y=0.5, font_size=12, showarrow=False)]
+        )
+        
+        return fig
+    
+    def create_comparison_chart(self, dp_result: Dict, greedy_result: Dict) -> go.Figure:
+        """
+        DP ve Greedy yöntemlerini karşılaştırır
+        """
+        methods = ['Dinamik Programlama', 'Açgözlü (Greedy)']
+        values = [dp_result['total_value'], greedy_result['total_value']]
+        weights = [dp_result['total_weight'], greedy_result['total_weight']]
+        
+        fig = make_subplots(
+            rows=1, cols=2,
+            subplot_titles=('Toplam Değer Karşılaştırması', 'Toplam Ağırlık Karşılaştırması'),
+            specs=[[{"type": "bar"}, {"type": "bar"}]]
+        )
+        
+        # Değer karşılaştırması
+        fig.add_trace(
+            go.Bar(x=methods, y=values, 
+                  marker_color=['green', 'orange'],
+                  name='Toplam Değer'),
+            row=1, col=1
+        )
+        
+        # Ağırlık karşılaştırması
+        fig.add_trace(
+            go.Bar(x=methods, y=weights,
+                  marker_color=['blue', 'red'],
+                  name='Toplam Ağırlık'),
+            row=1, col=2
+        )
+        
+        fig.update_layout(height=400, showlegend=False,
+                         title_text="Dinamik Programlama vs Açgözlü Yöntem Karşılaştırması")
+        
+        return fig
+    
+    def display_step_by_step(self, steps: List[Dict], step_index: int):
+        """
+        Adım adım çözümü gösterir
+        """
+        if not steps or step_index >= len(steps):
+            return
+            
+        step = steps[step_index]
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader(f"Adım {step_index + 1}")
+            st.write(f"**Eşya:** {step['item'] + 1}")
+            st.write(f"**Ağırlık:** {step['weight']}")
+            st.write(f"**Değer:** {step['value']}")
+            st.write(f"**Mevcut Kapasite:** {step['current_capacity']}")
+            st.write(f"**İşlem:** {step['action']}")
+            
+        with col2:
+            if 'take_value' in step and 'dont_take_value' in step:
+                st.write("**Karar Analizi:**")
+                st.write(f"• Eşyayı al: {step['take_value']}")
+                st.write(f"• Eşyayı alma: {step['dont_take_value']}")
+                st.write(f"• Seçim: {step['current_value']}")
+            else:
+                st.write(f"**Sonuç:** {step['current_value']}") 
